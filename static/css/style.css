@@ -1,0 +1,143 @@
+body {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    font-family:Verdana, sans-serif;
+    margin: 0;
+}
+/* MAIN.HTML */
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-areas: 
+    'settings chatinfo chatinfo'
+    'menu main main'
+    'search input input';
+    grid-template-rows: 50px auto 75px;
+    grid-template-columns: 350px auto auto;
+}
+.settings {
+    grid-area: settings;
+}
+.chatsearch {
+    grid-area: search;
+    text-align: center;
+}
+.chatselector {
+    overflow :auto;
+    grid-area: menu;
+}
+.chatinfo {
+    display: flex;
+    align-items: center;
+    width: auto;
+    grid-area: chatinfo;
+}
+.chatinfo > a {
+    display: none;
+    color:black
+}
+.messagecontainer {
+    display: flex;
+    flex-direction: column-reverse;
+    overflow :auto;
+    width: auto;
+    height: auto;
+    grid-area: main;
+}
+.message {
+    padding: 0;
+    margin-bottom: 10px;
+    height: fit-content;
+    width: fit-content;
+}
+.message > p{
+    border-radius: 15px;
+    font-size: 20px;
+    padding: 5px;
+    margin: 0;
+    width:fit-content;
+    background-color: #2185d1;
+    color: #fff;
+    position: relative;
+}
+.message > div {
+    display: none;
+    font-size: 16px;
+    position: relative;
+    left: 5px;
+}
+.inputcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: input;
+}
+.friend:hover {
+    cursor: pointer;
+}
+#chatlist { 
+    list-style-type: none;
+}
+#messagelist {
+    list-style-type: none;
+}
+#message {
+    display: none;
+    border: 2px solid black;
+    border-radius: 25px;
+    font-size: 16px;
+    width: 80%;
+    height: 40px;
+}
+#newchat {
+    padding: 0;
+    width: 100%;
+    height: 50%;
+    background-color: lightgrey;
+    font-size: 20px;
+    border: none;
+}
+#newchat:hover {
+    background-color: grey;
+    cursor: pointer;
+}
+#nochatwarning {
+    text-align: center;
+}
+#search {
+    display: none;
+    border: 1px solid black;
+    text-align: center;
+    padding: 0;
+    width: 98%;
+    height: 40%;
+    font-size: 16px;
+}
+
+@media only screen and (max-width: 600px) {
+    .chatinfo {display: none}
+    .messagecontainer {display: none}
+    .inputcontainer {display: none}
+    .settings {grid-area: 1 / 1 / span 1 / span 3;}
+    .chatselector{grid-area: 2 / 1 / span 1 / span 3;}
+    .chatsearch{grid-area: 3 / 1 / span 1 / span 3;}
+}
+
+
+
+
+
+
+/* LOGIN/SIGNUP.HTML */
+.form{
+    text-align: center;
+    position: relative;
+    align-self: center;
+}
+
+.form > p:first-child {
+    font-size: 26px;
+}

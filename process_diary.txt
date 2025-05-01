@@ -1,0 +1,57 @@
+8/4/2025
+    Created repository
+    Created basic directory
+        Created "database" folder
+        Created data.db
+        Created "messages" table in data.db to store messages
+        Created "Static" folder
+        Created style.css
+        Created "templates" folder
+        Created layout.html
+        Created main.html
+    Created app.py
+
+9/4/2025
+    added basic flask functionallity to app.py
+    added a text and submit input to main.html
+    added basic socketio message handling to app.py
+    implemented socketio message handling to main.html's javascript
+        listen for messages and create a new element when a message is recieved
+    implemented functionallity to the inputs on main.html, sending the message to the server.
+    styled messages
+
+11/4/2025
+    created grid-layout for main.html
+    removed submit button and replaced with an "enter" key listener
+    added visual compatibility for mobile devices
+        hides one "column" of the screen for devices with a view-width of less than 600px and adds a navigation button
+    added login/signup pages with respective routing
+    Created "users" table in data.db
+    Added "ProfilePicture" column to users in data.db which stores user's profile pictures as bit64 strings
+    Added encryption to userid, username, password and email
+        - learnt from https://stackoverflow.com/questions/73532164/proper-data-encryption-with-a-user-set-password-in-python3
+    Created a function to turn strings into decryptable 'blobs'
+12/4/2025
+    created a route to act as an api for javascript functions that need to fetch data from the database.
+    created a javascript function that calls the api on page load and adds all the users that have existing chats with the user to the chatselector element
+
+15/4/2025
+    Added functionallity to selecting a chat
+        messages will only be sent to the person selected
+        added "SessionID" column to users in data.db
+    Added searching for users to select a chat
+
+20/4/2025
+    fixed users sometimes showing up twice when searching
+    fixed "friends" (users with existing messages) not appearing on page load
+
+29/4/2025
+    fixed messages being displayed from users other than the selected chat
+
+30/4/2025
+    changed socket handling from user -> server -> user to user -> server -> room
+        made search bar only show after clicking a button for group-chats to be added later
+
+1/5/2025
+    added joining/creating rooms when selecting chats 
+        

@@ -1,0 +1,152 @@
+{% include 'layout.html' %}
+<body>
+    <div class="container">
+        <div class="settings">
+        </div>
+        <div class="chatinfo">
+            <p id="chatname"></p>
+            <a href="#" onclick="showmenu()"><i class="material-icons">arrow_back_ios_new</i></a>
+        </div>
+        <div class="chatselector" id="chatselector">
+            <li id="chatlist">
+            </li>
+        </div>
+        <div class="messagecontainer" id="messagewindow">
+            <li id="messagelist" style="list-style-type: none;">
+            </li>
+        </div>
+        <div class="chatsearch">
+            <input type="text" id="search" oninput="searchuser()" placeholder="SEARCH">
+            <button id="newchat" onclick="newchat()">+</button>
+
+        </div>
+        <div class="inputcontainer">
+            <input type="text" placeholder="Message" id="message">
+        </div> 
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.min.js"></script>
+    <script>
+        var socket = io()
+        let receiver = ""
+        let current_room = ""
+        let chatlistmode = "chats"
+        window.onload = async function(){
+            updatefriends()
+            friends = await callapi("friends")
+            if (friends.length<100) {
+                setchat("WELCOME")
+            }
+            else {
+                setchat(JSON.parse(friends)[Object.keys(JSON.parse(friends))[0]]['Username'])
+            }
+            document.getElementById('chatname').textContent=receiver
+        }
+
+        function newchat() {
+            if (document.getElementById("search").style.display!="block") {
+                document.getElementById("search").style.display="block"
+                document.getElementById("newchat").textContent="-"
+                chatlistmode = "users"
+            }
+            else {
+                document.getElementById("search").style.display="none"
+                document.getElementById("newchat").textContent="+"
+                chatlistmode = "chats"
+                updatefriends()
+            }
+        }
+
+        function showmenu() {
+            
+        }
+        async function callapi(data) {
+            let request = await fetch("{{url_for('api', data='')}}" + data);
+            response = await request.text()
+            return (response)
+        }
+        async function updatefriends() {
+            document.getElementById('chatlist').remove()
+            let newfriendslist = document.createElement('li')
+            newfriendslist.id="chatlist"
+            document.getElementById('chatselector').appendChild(newfriendslist)
+            var array = JSON.parse(await callapi("friends"))
+            console.log(array)
+            if (array.length==0) {
+                let chatwarning = document.createElement("p")
+                chatwarning.id="nochatwarning"
+                chatwarning.textContent="No chats found. Use the search bar to start a chat"
+                document.getElementById("chatlist").append(chatwarning)
+            }
+            for (user in array) {
+                console.log(array[user])
+                let username = array[user]
+                let newuser = document.createElement('ul')
+                let text = document.createElement('p')
+                let room=user
+                text.textContent=username
+                document.getElementById('chatlist').appendChild(newuser)
+                newuser.appendChild(text)
+                newuser.onclick = function() {setchat(username, room)}
+                newuser.className = "friend"
+            }
+        }
+        function setchat(user, roomid) {
+            if (chatlistmode=="users") {
+                socket.emit("newroom", ["{{username}}", user])
+            }
+            document.getElementById('chatname').textContent=user
+            document.getElementById('messagelist').remove()
+            let newchats = document.createElement('li')
+            newchats.id="messagelist"
+            document.getElementById('messagewindow').appendChild(newchats)
+            document.getElementById('message').style.display="block"
+            if (current_room!="" && current_room!=roomid) {
+                socket.emit("leaveroom", current_room)
+            }
+            console.log("joining room ", roomid)
+            socket.emit("joinroom", roomid)
+            current_room=roomid
+        }
+        async function searchuser() {
+            if (chatlistmode=="users") {
+                var array = JSON.parse(await callapi("allusers"))
+                document.getElementById('chatlist').remove()
+                let newfriendslist = document.createElement('li')
+                newfriendslist.id="chatlist"
+                document.getElementById('chatselector').appendChild(newfriendslist)
+                for (user in array) {
+                    let username = array[user]['username']
+                    if (username.includes(document.getElementById('search').value) && document.getElementById('search').value.length>0) {
+                        let newuser = document.createElement('ul')
+                        let text = document.createElement('p')
+                        text.textContent=username
+                        document.getElementById('chatlist').appendChild(newuser)
+                        newuser.appendChild(text)
+                        newuser.onclick = function() {setchat(username)}
+                        newuser.className = "friend"
+                    }
+                }
+            }
+        }
+        document.getElementById('message').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && document.getElementById('message').value.replaceAll(' ', '').length >=1) {
+            console.log(current_room)
+            socket.emit("message", JSON.stringify({"message": document.getElementById('message').value, "sender": '{{username}}', "room": current_room}))
+            document.getElementById('message').value=""
+        }})
+        socket.on('message', function(data){
+            console.log(data)
+            let sender = JSON.parse(data)['username']
+            let message = document.createElement('ul')
+            let text = document.createElement('p')
+            senderdiv = document.createElement('div')
+            text.textContent=JSON.parse(data)['message']
+            document.getElementById('messagelist').appendChild(message)
+            senderdiv.textContent=sender
+            message.appendChild(senderdiv)
+            message.appendChild(text)
+            message.className = "message"
+            }
+        )
+    </script>
+</body>

@@ -1,0 +1,15 @@
+{%include 'layout.html' %}
+<form action="{{ url_for('login')}}" method = "POST" class="form"> <!-- a form to be submitted to the root page -->
+    <p>SIGN IN</p>
+    <p>Username</p>
+    <p><input type = "text" name = "username" class="username" placeholder=""/></p>
+    <p>Password</p>
+    <p><input type = "password" name = "password" class="password" placeholder=""/></p>
+    {% if error %} <!-- if there is an error passed in app.py, it will display here -->
+        <p style="color: #ff0000; text-align: center;">{{error}}</p>
+    {%endif%}
+    {% if success %} <!-- if there is an error passed in app.py, it will display here -->
+        <p style="color: #00ff00; text-align: center;">Account Created</p>
+    {%endif%}
+    <p><input type = "submit" value = "CONTINUE" name="button" class="bt1"/></p> <!-- the form's submit button -->
+</form>
