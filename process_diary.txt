@@ -54,4 +54,31 @@
 
 1/5/2025
     added joining/creating rooms when selecting chats 
-        
+
+2/5/2025
+    fixed leaving/switching rooms not working
+
+7/5/2025
+    loaded message history when selecting a different chat 
+        uploaded messages to 'rooms' table in data.db
+        added new api call
+8/5/2025
+    added profile pictures
+    differentiated sent and received messages
+        sent messages are moved to the right of the container and received messages are moved to the left
+    added profile picture uploading
+    fixed message sender differentiating not working.
+    styled main page
+
+9/5/2025
+    Created a fake user to use as an AI chatbot
+    Added functionallity to test whether the user is messaging the bot
+    Added AI functionallity from google gemini https://ai.google.dev/gemini-api/docs/text-generation
+    Added message sending for the bot.
+        returns the resposne from gemini as a "message"
+    Saved the messages from the ai to the database as if it were a real user.
+15/5/2025
+    Added styling to chats.
+19/5/2025
+    Created .env file to store the encryption key
+    Created classes.py to store classes used for SQLAlchemy
