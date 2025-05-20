@@ -1,31 +1,99 @@
 body {
     display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    font-family:Verdana, sans-serif;
+    font-family: "Lucida Console", "Courier New", monospace;
     margin: 0;
-}
-/* MAIN.HTML */
-.container {
-    width: 100vw;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
     height: 100vh;
+    text-align: center;
+    flex-direction: column;
+}
+
+/* NAVBAR */
+.nav {
+    top: 0;
+    left: 0;
+    position: absolute;
+    margin: 0;
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    justify-content: right;
+    background-color: #11141a;
+}
+
+.nav > li {
+    position: relative;
+    right: 40px;
+    padding: 20px;
+    list-style-type: none;
+    font-size: 20px;
+}
+.nav > li > a {
+    text-decoration: none;
+    color: #babbd9;
+}
+
+/* DASHBOARD.HTML */
+.container {
+    position: relative;
     display: grid;
     grid-template-areas: 
-    'settings chatinfo chatinfo'
-    'menu main main'
-    'search input input';
-    grid-template-rows: 50px auto 75px;
-    grid-template-columns: 350px auto auto;
+    'header header'
+    'main main';
+    grid-template-rows: 50px auto;
+    grid-template-columns: 350px 350px;
+    margin-bottom: 100px;
 }
-.settings {
-    grid-area: settings;
+.container >h1 {
+    grid-area: header;
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    color: #babbd9;
 }
-.settings > img {
-    height: 100%;
+.container > p {
+    margin-top: 75px;
+    font-size: 20px;
 }
-.settings >img:hover{
-    cursor:pointer;
+.container > p > a {
+    text-decoration: none;
+    color: #9697b3;
+    transition: 0.5s ease;
+}
+
+.container > p > a:hover {
+    font-size: 22px;
+}
+
+
+/* CHAT.HTML */
+.container2 {
+    position: relative;
+    width: 100vw;
+    height: calc(100vh - 60px);
+    display: grid;
+    grid-template-areas: 
+    'chatselectorsettings chatinfo'
+    'chatselector chat';
+    grid-template-rows: 50px auto;
+    grid-template-columns: 350px auto;
+    align-self:last baseline;
+}
+#chatselectorsettings {
+    grid-area: chatselectorsettings;
+}
+#chatinfo {
+    grid-area: chatinfo;
+}
+#chatselector {
+    grid-area: chatselector
+}
+#chat {
+    grid-area: chat;
+    width: 100px;
 }
 #profilesettings {
     height: 200px;
@@ -224,11 +292,32 @@ body {
 
 /* LOGIN/SIGNUP.HTML */
 .form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    position: relative;
-    align-self: center;
+    flex-direction: column;
+    color: #babbd9;
+}
+.form > p{
+    font-size: 20px;
+}
+.form > input {
+    font: inherit;
+    width: fit-content;
+}
+.form > #submit {
+    margin-top: 25px;
+    border:none;
+    color: inherit;
+    font: inherit;
+    font-size: 30px;
+    background-color: transparent;
+    transition: 0.5s ease;
+}
+.form >#submit:hover {
+    cursor: pointer;
+    color: #9697b3;
+    font-size: 32px;
 }
 
-.form > p:first-child {
-    font-size: 26px;
-}

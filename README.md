@@ -1,1 +1,1 @@
-# JeremyChat
+# JChat

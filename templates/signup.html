@@ -1,15 +1,17 @@
-{%include 'layout.html' %}
-<form action="" method = "POST" class="form"> <!-- a form to be submitted to the root page -->
-    <p>SIGN UP</p>
-    <p>Email</p>
-    <p><input type = "text" name = "email" class="email" placeholder=""/></p>
-    <p>Username</p>
-    <p><input type = "text" name = "username" class="username" placeholder=""/></p>
-    <p>Password</p>
-    <p><input type = "password" name = "password" class="password" placeholder=""/></p>
-    {% if error %} <!-- if there is an error with the inputs, app.py will return an error and it will be displayed here -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<form method = "POST" class="form">
+    <h1>sign up</h1>
+    {{form.hidden_tag()}}<!-- hidden tag to prevent CSRF attacks -->
+    <p>username</p>
+    {{form.username}}
+    <p>password</p>
+    {{form.password}}
+    {% if error %} <!-- if there is an error passed in app.py, it will display here -->
         <p style="color: #ff0000; text-align: center;">{{error}}</p>
     {%endif%}
-    <!-- form submition button -->
-    <p><input type = "submit" value = "CREATE ACCOUNT" name="button" class="bt1"/></p>
+    {% if success %} <!-- if there is an error passed in app.py, it will display here -->
+        <p style="color: #00ff00; text-align: center;">Account Created</p>
+    {%endif%}
+    {{form.submit}} <!-- the form's submit button -->
 </form>
+<a style="color:#babbd9; margin-top: 100px;" href="{{url_for('login')}}">sign in</a>
