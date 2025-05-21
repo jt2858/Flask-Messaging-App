@@ -4,7 +4,8 @@ body {
     margin: 0;
     overflow: hidden;
     align-items: center;
-    justify-content: center;
+    max-height: 100vh;
+    max-width: 100vw;
     height: 100vh;
     text-align: center;
     flex-direction: column;
@@ -12,10 +13,9 @@ body {
 
 /* NAVBAR */
 .nav {
-    top: 0;
-    left: 0;
-    position: absolute;
+    position: relative;
     margin: 0;
+    padding: 0;
     display: flex;
     width: 100%;
     max-width: 100%;
@@ -26,14 +26,17 @@ body {
 
 .nav > li {
     position: relative;
-    right: 40px;
     padding: 20px;
     list-style-type: none;
     font-size: 20px;
 }
 .nav > li > a {
     text-decoration: none;
-    color: #babbd9;
+    color: #ccc;
+    transition: 0.2s ease;;
+}
+.nav > li > a:hover {
+    color: #8586a0;
 }
 
 /* DASHBOARD.HTML */
@@ -45,7 +48,7 @@ body {
     'main main';
     grid-template-rows: 50px auto;
     grid-template-columns: 350px 350px;
-    margin-bottom: 100px;
+    margin-top: 300px;
 }
 .container >h1 {
     grid-area: header;
@@ -92,11 +95,18 @@ body {
 }
 #chatselectorsettings > p {
     margin: 0;
+    margin-left: auto;
     font-size: 24px;
     font-weight: bold;
 }
-#chatinfo {
-    grid-area: chatinfo;
+#chatselectorsettings > i {
+    margin-left: auto;
+    margin-right: 25px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+#chatselectorsettings > i:hover {
+    color: #8184d6;
 }
 #chatselector {
     color: white;
@@ -112,13 +122,14 @@ body {
     align-items: center;
     height: 60px;
     transition: 0.2s ease;
+    cursor: pointer;
 }
 #chatselector > ul > li:hover {
     background-color: #292e38;
     border-color: #434a57;
-    cursor: pointer;
 }
 #chatselector > ul > li > i {
+    transition: 0.2s ease;
     display: none;
     margin-left: auto;
     margin-right: 25px;
@@ -137,28 +148,38 @@ body {
     height: 35px; 
     width: 35px;
     border-radius: 50%;
-    margin-right: 10px;
-    margin-left: 20px;
+    margin-right: 15px;
+    margin-left: 25px;
 }
 #chat {
+    display: flex;
     grid-area: chat;
     background-color: #2f2f2f;
+    align-items: center;
+    justify-content: end;
+    flex-direction: column;
 }
 #chat > ul {
     list-style-type: none;
+    width: 100%;
+    height: 100%;
 }
 #chat > ul > li {
+    display: flex;
     padding: 0;
     margin: 10px;
     height: fit-content;
     width: auto;
 }
 #chat > ul > li > p{
+    cursor:default;
     font-family: "Lucida Console", "Courier New", monospace;
-    max-width: 40%;
+    max-width: 80%;
     border-radius: 20px;
     font-size: 20px;
-    padding: 7.5px;
+    padding: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
     margin: 0;
     width: fit-content;
     color: #ccc;
@@ -171,12 +192,71 @@ body {
     margin-right: 10px;
     justify-content: right;
 }
+#chat > ul > li > i {
+    cursor:default;
+    color: #ccc;
+    font-size: 12px;
+    padding-right: 2px;
+    margin-right: 10px;
+    display: none;
+    align-items: center;
+    overflow: hidden;
+    width: 0px;
+    transition: 1s ease;
+}
 #chat > ul > li[sent] > p{
     background-color: #444444;
 }
 #chat > ul > li[received] > p{
     background-color: #222222;
 }
+#chat > ul > li:hover i{
+    transition: 0.2s ease;
+    display: flex;
+    width: fit-content;
+}
+#chat > ul > li[sent]:hover i{
+    
+}
+#chat > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+#chat > div > textarea {
+    outline: none;;
+    resize: none;
+    position: relative;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 16px;
+    border: 1px solid #434a57;
+    border-radius: 5px;
+    width: 400px;
+    padding: 10px;
+    height: 18px;
+    background-color: #2f2f2f;
+    color: #ccc;
+}
+#chat > div > i {
+    margin-left: 10px;
+    color: #ccc;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+#chat > div > i:hover {
+    color: #8184d6;
+    transform: translate(5px,0);
+}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -222,7 +302,6 @@ body {
 #selectpfpimage {
     height: 100%;
 }
-
 
 .chatsearch {
     grid-area: search;
@@ -388,3 +467,26 @@ body {
     font-size: 32px;
 }
 
+
+
+/* SCROLLBAR */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #222222;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #444444;
+}

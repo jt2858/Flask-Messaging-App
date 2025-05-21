@@ -1,8 +1,9 @@
 {%include 'layout.html' %}
-<body style="justify-content:end;"></body>
+<script src="{{ url_for('static', filename='js/messenger.js') }}"></script>
 <div class="container2">
     <div id="chatselectorsettings">
         <p>{{username}}</p>
+        <i class="material-icons">add</i>
     </div>
     <div id="chatselector">
         <ul>
@@ -24,9 +25,13 @@
                 {%else%}
                     <li received="True">
                 {%endif%}
-                    <p>{{message[0]}}: {{message[1]}}</p>
+                    <i>{{message[0]}}</i><p>{{message[1]}}</p>
                 </li>
             {%endfor%}
         </ul>
+        <div>
+            <textarea type="text" id="messageinput"></textarea>
+            <i class="material-icons">send</i>
+        </div>
     </div>
 </div>

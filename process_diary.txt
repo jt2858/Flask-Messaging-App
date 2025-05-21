@@ -81,12 +81,26 @@
     Added styling to chats.
 19/5/2025
     Created .env file to store the encryption key
-    Created a new workspace to start from scratch
+    ----------------------------------------------
+    Created a new workspace to start from scratch (still borrowing previous code)
     Styled root page
     Created login,signup,dashboard,calendar,messenger .html files and their respective routing
     Switched to SQLAlchemy and Flask Login & added functionallity to respective files
 
 20/05/2025
     Created navbar
-    Created layout for messenger.html
+    Added basic href links to dashboard
     Created classes for use in messenger.html
+
+21/05/2025
+    Created a grid container for elements of messenger.html
+    Added elements to messenger.html
+        chatselector -> where the user selects the chat to view
+        chatselectorsettings -> where the user can press "+" to create a new chat.
+        chat -> the container for chat messages
+            Added styling to individual chats
+            Added styling to message bar & send btn
+    Styled elements thoroughly
+    Added routing for different chats e.g /messenger?chatid=0
+        Added handling for these requests, passing the message history if chatid is given
+    
