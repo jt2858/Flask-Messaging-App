@@ -81,4 +81,12 @@
     Added styling to chats.
 19/5/2025
     Created .env file to store the encryption key
-    Created classes.py to store classes used for SQLAlchemy
+    Created a new workspace to start from scratch
+    Styled root page
+    Created login,signup,dashboard,calendar,messenger .html files and their respective routing
+    Switched to SQLAlchemy and Flask Login & added functionallity to respective files
+
+20/05/2025
+    Created navbar
+    Created layout for messenger.html
+    Created classes for use in messenger.html

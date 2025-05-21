@@ -69,32 +69,117 @@ body {
 }
 
 
-/* CHAT.HTML */
+/* MESSENGER.HTML */
 .container2 {
     position: relative;
     width: 100vw;
     height: calc(100vh - 60px);
     display: grid;
     grid-template-areas: 
-    'chatselectorsettings chatinfo'
+    'chatselectorsettings chat'
     'chatselector chat';
     grid-template-rows: 50px auto;
     grid-template-columns: 350px auto;
     align-self:last baseline;
 }
 #chatselectorsettings {
+    background-color: #11141a;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     grid-area: chatselectorsettings;
+}
+#chatselectorsettings > p {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
 }
 #chatinfo {
     grid-area: chatinfo;
 }
 #chatselector {
-    grid-area: chatselector
+    color: white;
+    grid-area: chatselector;
+    background-color: #11141a;
+}
+#chatselector > ul {
+    padding: 0;
+}
+#chatselector > ul > li {
+    border: 1px solid #11141a;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    transition: 0.2s ease;
+}
+#chatselector > ul > li:hover {
+    background-color: #292e38;
+    border-color: #434a57;
+    cursor: pointer;
+}
+#chatselector > ul > li > i {
+    display: none;
+    margin-left: auto;
+    margin-right: 25px;
+    right: 0;
+}
+#chatselector > ul > li:hover i{
+    display: block;
+}
+#chatselector > ul > li > i:hover {
+    color: #8184d6;
+}
+#chatselector > ul > li > p {
+    margin: 0;
+}
+#chatselector > ul > li > img {
+    height: 35px; 
+    width: 35px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-left: 20px;
 }
 #chat {
     grid-area: chat;
-    width: 100px;
+    background-color: #2f2f2f;
 }
+#chat > ul {
+    list-style-type: none;
+}
+#chat > ul > li {
+    padding: 0;
+    margin: 10px;
+    height: fit-content;
+    width: auto;
+}
+#chat > ul > li > p{
+    font-family: "Lucida Console", "Courier New", monospace;
+    max-width: 40%;
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 7.5px;
+    margin: 0;
+    width: fit-content;
+    color: #ccc;
+    position: relative;
+    word-wrap: break-word;
+}
+#chat > ul > li[sent] {
+    display:flex;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    justify-content: right;
+}
+#chat > ul > li[sent] > p{
+    background-color: #444444;
+}
+#chat > ul > li[received] > p{
+    background-color: #222222;
+}
+
+
+
 #profilesettings {
     height: 200px;
     width: 300px;
@@ -169,24 +254,6 @@ body {
     width: auto;
     height: auto;
     grid-area: main;
-}
-.message {
-    padding: 0;
-    margin: 10px;
-    height: fit-content;
-    width: auto;
-}
-.message > p{
-    font-family: "Lucida Console", "Courier New", monospace;
-    max-width: 40%;
-    border-radius: 20px;
-    font-size: 20px;
-    padding: 7.5px;
-    margin: 0;
-    width: fit-content;
-    color: #fff;
-    position: relative;
-    word-wrap: break-word;
 }
 .message > div {
     display: none;

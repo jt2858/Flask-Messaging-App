@@ -2,15 +2,31 @@
 <body style="justify-content:end;"></body>
 <div class="container2">
     <div id="chatselectorsettings">
-
+        <p>{{username}}</p>
     </div>
     <div id="chatselector">
-
-    </div>
-    <div id="chatinfo">
-        <p>{{current_chat}}</p>
+        <ul>
+            {% for chat in existing_chats %}
+                <li onclick='location.href="{{url_for('messenger', chatid=chat[3]) }}"'>
+                    <img src="{{chat[2]}}">
+                    <p>{{chat[0]}}</p>
+                    <i class="material-icons">more_horiz</i>
+                </li>
+            {% endfor %}
+        </ul>
+        
     </div>
     <div id="chat">
-
+        <ul>
+            {% for message in message_history %}
+                {% if message[0]==current_user %}
+                    <li sent="True">
+                {%else%}
+                    <li received="True">
+                {%endif%}
+                    <p>{{message[0]}}: {{message[1]}}</p>
+                </li>
+            {%endfor%}
+        </ul>
     </div>
 </div>
