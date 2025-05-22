@@ -14,10 +14,14 @@
     <div id="chatselector">
         <ul>
             {% for chat in existing_chats %}
-                <li onclick='location.href="{{url_for('messenger', chatid=chat[3]) }}"'>
+                <li onclick='if (event.target==event.currentTarget){window.location.href="{{url_for('messenger', chatid=chat[3]) }}"}'>
                     <img src="{{chat[2]}}">
                     <p>{{chat[0]}}</p>
-                    <i class="material-icons">more_horiz</i>
+                    <div>
+                        <i class="material-icons" onclick="chatselectoroptions()" tabindex="1">more_horiz</i>
+                        <i class="material-icons" onclick="">push_pin</i>
+                        <i class="material-icons">delete</i>
+                    </div>
                 </li>
             {% endfor %}
         </ul>
@@ -36,11 +40,7 @@
             {%endfor%}
         </ul>
         <div>
-            <textarea type="text" id="messageinput"></textarea>
-            <i class="material-icons">send</i>
-        </div>
-        <div>
-            <textarea type="text" id="messageinput"></textarea>
+            <textarea id="messageinput"></textarea>
             <i class="material-icons">send</i>
         </div>
     </div>

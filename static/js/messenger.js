@@ -1,6 +1,7 @@
 function sendMessage() {
-    const messageInput = document.getElementById("messageInput").value;
-    console.log("Sending message:", messageInput.value);
+    const messageInput = document.getElementById("messageinput").value;
+    console.log(messageInput)
+    document.getElementById("messageinput").value = null;
 }
 function shownewchatmenu() {
     if (document.getElementById("newchatmenu").style.display!="flex") {
@@ -17,20 +18,35 @@ window.onload = function() {
                 document.getElementById("newchatmenu").style.display = "none";
             }, 500);
         }
+    });
+    document.getElementById("messageinput").addEventListener("keydown", e => {
+        if (e.key == "Enter" && e.shiftKey == false) {
+            sendMessage();
+            e.preventDefault();
+            return;
+        }
     })
 }
-function searchusers() {
-    users = callapi("usersearch", document.getElementById("searchusers").value);
+async function searchusers() {
+    document.getElementById("userlist").innerHTML = "";
+    if (document.getElementById("searchusers").value == "") {
+        return;
+    }
+    users = await callapi("usersearch", document.getElementById("searchusers").value);
     for (user in users) {
         let userelement = document.createElement("li")
         let userp = document.createElement("p")
-        let userimg = docmuent.createElement("img")
-        userimg.src=users[0]
-        userp.textContent=users[1]
+        let userimg = document.createElement("img")
+        userimg.src=users[user]['picture']
+        userp.textContent=users[user]['username']
         document.getElementById("userlist").appendChild(userelement)
         userelement.appendChild(userimg)
         userelement.appendChild(userp)
     }
+}
+
+function chatselectoroptions() {
+    
 }
 
 async function callapi(arg, val) {
