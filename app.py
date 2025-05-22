@@ -132,5 +132,13 @@ def messenger():
 def calendar():
     return render_template('calendar.html', username=current_user.username)
 
+@app.route('/api')
+@login_required
+def api():
+    if request.args.get("usersearch"):
+        users={}
+        for user in enumerate(User.query.filter(User.username.contains(request.args.get("usersearch"))).all()):
+            users.update({user[0]: {"username": user[1].username, "picture": user[1].picture}})
+        return users
 if __name__ == '__main__':
     app.run(debug=True)

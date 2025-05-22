@@ -1,9 +1,15 @@
+html { 
+    overflow: hidden;
+    width: 100vw;
+    background-color: black;
+}
 body {
     display: flex;
     font-family: "Lucida Console", "Courier New", monospace;
     margin: 0;
-    overflow: hidden;
     align-items: center;
+    max-height: 100vh;
+    max-width: 100vw;
     max-height: 100vh;
     max-width: 100vw;
     height: 100vh;
@@ -14,7 +20,9 @@ body {
 /* NAVBAR */
 .nav {
     position: relative;
+    position: relative;
     margin: 0;
+    padding: 0;
     padding: 0;
     display: flex;
     width: 100%;
@@ -37,6 +45,11 @@ body {
 }
 .nav > li > a:hover {
     color: #8586a0;
+    color: #ccc;
+    transition: 0.2s ease;;
+}
+.nav > li > a:hover {
+    color: #8586a0;
 }
 
 /* DASHBOARD.HTML */
@@ -48,6 +61,7 @@ body {
     'main main';
     grid-template-rows: 50px auto;
     grid-template-columns: 350px 350px;
+    margin-top: 300px;
     margin-top: 300px;
 }
 .container >h1 {
@@ -73,7 +87,7 @@ body {
 
 
 /* MESSENGER.HTML */
-.container2 {
+#container2 {
     position: relative;
     width: 100vw;
     height: calc(100vh - 60px);
@@ -84,6 +98,55 @@ body {
     grid-template-rows: 50px auto;
     grid-template-columns: 350px auto;
     align-self:last baseline;
+    transition: 0.5s ease;
+}
+#newchatmenu {
+    outline: none;
+    display: none;
+    opacity: 0;
+    position: absolute;
+    background-color: #222222;
+    border: 1px solid #444444;
+    z-index: 1;
+    height: 10%;
+    top: 20%;
+    left: 50%;
+    width: 25%;
+    transform: translate(-50%, 0);
+    flex-direction: row;
+    justify-content: center;
+    transition: 0.5s ease;
+    backdrop-filter: blur(5px);
+}
+#newchatmenu:focus-within {
+    opacity: 1;
+    height: 65%;
+}
+#newchatmenu > input {
+    position: relative;
+    outline: none;
+    background-color: transparent;
+    border: 1px solid #434a57;
+    width: 55%;
+    margin-top: 50px;
+    font-size: 20px;
+    height: 35px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #ccc;
+    font-family: inherit;
+}
+#newchatmenu > i {
+    cursor: pointer;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-top: 50px;
+    font-size: 28px;
+    margin-left: 20px;
+    margin-right: -10px;
+    height: 35px;
 }
 #chatselectorsettings {
     background-color: #11141a;
@@ -96,9 +159,18 @@ body {
 #chatselectorsettings > p {
     margin: 0;
     margin-left: auto;
+    margin-left: auto;
     font-size: 24px;
     font-weight: bold;
 }
+#chatselectorsettings > i {
+    margin-left: auto;
+    margin-right: 25px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+#chatselectorsettings > i:hover {
+    color: #8184d6;
 #chatselectorsettings > i {
     margin-left: auto;
     margin-right: 25px;
@@ -123,12 +195,14 @@ body {
     height: 60px;
     transition: 0.2s ease;
     cursor: pointer;
+    cursor: pointer;
 }
 #chatselector > ul > li:hover {
     background-color: #292e38;
     border-color: #434a57;
 }
 #chatselector > ul > li > i {
+    transition: 0.2s ease;
     transition: 0.2s ease;
     display: none;
     margin-left: auto;
@@ -150,11 +224,17 @@ body {
     border-radius: 50%;
     margin-right: 15px;
     margin-left: 25px;
+    margin-right: 15px;
+    margin-left: 25px;
 }
 #chat {
     display: flex;
+    display: flex;
     grid-area: chat;
     background-color: #2f2f2f;
+    align-items: center;
+    justify-content: end;
+    flex-direction: column;
     align-items: center;
     justify-content: end;
     flex-direction: column;
@@ -163,8 +243,11 @@ body {
     list-style-type: none;
     width: 100%;
     height: 100%;
+    width: 100%;
+    height: 100%;
 }
 #chat > ul > li {
+    display: flex;
     display: flex;
     padding: 0;
     margin: 10px;
@@ -173,10 +256,15 @@ body {
 }
 #chat > ul > li > p{
     cursor:default;
+    cursor:default;
     font-family: "Lucida Console", "Courier New", monospace;
+    max-width: 80%;
     max-width: 80%;
     border-radius: 20px;
     font-size: 20px;
+    padding: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
     padding: 8px;
     padding-left: 15px;
     padding-right: 15px;
@@ -209,14 +297,6 @@ body {
 }
 #chat > ul > li[received] > p{
     background-color: #222222;
-}
-#chat > ul > li:hover i{
-    transition: 0.2s ease;
-    display: flex;
-    width: fit-content;
-}
-#chat > ul > li[sent]:hover i{
-    
 }
 #chat > div {
     display: flex;
@@ -468,6 +548,28 @@ body {
 }
 
 
+
+/* SCROLLBAR */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #222222;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #444444;
+}
 
 /* SCROLLBAR */
 /* width */

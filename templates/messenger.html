@@ -1,9 +1,15 @@
 {%include 'layout.html' %}
 <script src="{{ url_for('static', filename='js/messenger.js') }}"></script>
-<div class="container2">
+<div id="newchatmenu" tabindex="0">
+    <input type="text" oninput="searchusers()" id="searchusers"><i class="material-icons">search</i>
+    <ul id="userlist">
+        
+    </ul>
+</div>
+<div id="container2">
     <div id="chatselectorsettings">
         <p>{{username}}</p>
-        <i class="material-icons">add</i>
+        <i class="material-icons" onclick="shownewchatmenu()">add</i>
     </div>
     <div id="chatselector">
         <ul>
@@ -25,10 +31,14 @@
                 {%else%}
                     <li received="True">
                 {%endif%}
-                    <i>{{message[0]}}</i><p>{{message[1]}}</p>
+                    <p>{{message[1]}}</p>
                 </li>
             {%endfor%}
         </ul>
+        <div>
+            <textarea type="text" id="messageinput"></textarea>
+            <i class="material-icons">send</i>
+        </div>
         <div>
             <textarea type="text" id="messageinput"></textarea>
             <i class="material-icons">send</i>
