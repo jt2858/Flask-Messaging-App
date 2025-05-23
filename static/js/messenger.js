@@ -26,28 +26,39 @@ window.onload = function() {
             return;
         }
     })
+    
 }
 async function searchusers() {
-    document.getElementById("userlist").innerHTML = "";
     if (document.getElementById("searchusers").value == "") {
+        document.getElementById("userlist").remove();
+        let newul = document.createElement("ul");
+        document.getElementById("newchatmenu").appendChild(newul);
+        newul.id="userlist";
         return;
     }
     users = await callapi("usersearch", document.getElementById("searchusers").value);
+    document.getElementById("userlist").remove();
+    let newul = document.createElement("ul");
     for (user in users) {
-        let userelement = document.createElement("li")
-        let userp = document.createElement("p")
-        let userimg = document.createElement("img")
-        userimg.src=users[user]['picture']
-        userp.textContent=users[user]['username']
-        document.getElementById("userlist").appendChild(userelement)
-        userelement.appendChild(userimg)
-        userelement.appendChild(userp)
+        let userelement = document.createElement("li");
+        let userp = document.createElement("p");
+        let userimg = document.createElement("img");
+        let usercheckbox = document.createElement("input")
+        let usercheckmark = document.createElement("span");
+        usercheckbox.type="checkbox";
+        userimg.src=users[user]['picture'];
+        userp.textContent=users[user]['username'];
+        newul.appendChild(userelement);
+        userelement.appendChild(userimg);
+        userelement.appendChild(userp);
+        userelement.appendChild(usercheckbox)
+        userelement.appendChild(usercheckmark);
+        userelement.onclick=function(){usercheckbox.click()};
     }
+    document.getElementById("newchatmenu").appendChild(newul);
+    newul.id="userlist";
 }
 
-function chatselectoroptions() {
-    
-}
 
 async function callapi(arg, val) {
     const response = await fetch(apiurl + "?"+ String(arg) + "="+String(val));

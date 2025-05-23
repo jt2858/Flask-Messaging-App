@@ -173,6 +173,42 @@ body {
     margin-right: 15px;
     margin-left: 25px;
 }
+#newchatmenu > ul > li > input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+    cursor: pointer;
+}
+#newchatmenu > ul > li > input:checked ~ span {
+    background-color: #8184d6;
+}
+#newchatmenu > ul > li > span {
+    margin-left: auto;
+    margin-right: 15px;
+    width: 17px;
+    height: 17px;
+    background-color: #2f2f2f;
+    border: 1px solid #11141a;
+    border-radius: 50%;
+    transition: 0.2s ease;
+}
+#newchatmenu > button {
+    position: absolute;
+    font: inherit;
+    background-color: #292e38;
+    color: #ccc;
+    border: 1px solid #434a57;
+    font-size: 28;
+    height: 7%;
+    bottom: 10%;
+    width: 70%;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+#newchatmenu > button:hover {
+    background-color: #434a57;
+    border: 1px solid #8184d6;
+}
 #chatselectorsettings {
     background-color: #11141a;
     color: white;
@@ -248,14 +284,17 @@ body {
 #chatselector > ul > li:hover > div {
     width: fit-content;
 }
-#chatselector > ul > li > div > i:focus-within {
+#chatselector > ul > li > div > i:focus {
     display: block;
     color: #8184d6;
 }
 #chatselector > ul > li > div > i:hover {
     color: #8184d6;
 }
-#chatselector > ul > li > div > i:first-of-type:focus-within ~ i{
+#chatselector > ul > li > div:focus-within > i{
+    display: block;
+}
+#chatselector > ul > li > div > i:last-of-type:focus-within {
     display: block;
 }
 #chatselector > ul > li > p {

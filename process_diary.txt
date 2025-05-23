@@ -103,4 +103,18 @@
     Styled elements thoroughly
     Added routing for different chats e.g /messenger?chatid=0
         Added handling for these requests, passing the message history if chatid is given
+
+22/05/2025
+    Added "+" button to open a menu that lets you create a new chat
+    Created the menu
+    Styled the menu
+    Added javascript to the button to popup the menu
+    Added "..." next to users in chatlist for options like deleting
+    Added Searchbar and submit button
+    Styled searchbar and submit button
+    Added searchbar to the menu that lets you create a new chat
+
+23/05/2025
+    Added functionality to menu searchbar
+        Added new route 
     

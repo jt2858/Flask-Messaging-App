@@ -140,5 +140,10 @@ def api():
         for user in enumerate(User.query.filter(User.username.contains(request.args.get("usersearch"))).all()):
             users.update({user[0]: {"username": user[1].username, "picture": user[1].picture}})
         return users
+    if request.args.get("deletechat"):
+        Chat.query.filter_by(id=request.args.get("deletechat"))
+        return redirect(url_for('messenger'))
+    if request.args.get("createchat"):
+        newchat = Chat()
 if __name__ == '__main__':
     app.run(debug=True)
