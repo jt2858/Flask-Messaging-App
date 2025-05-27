@@ -162,6 +162,6 @@ def api():
             currentchats.update({str(len(currentchats)): str(newchat.id)})
             User.query.filter_by(username=user).first().chats=json.dumps(currentchats)
         db.session.commit()
-        return redirect(url_for("messenger"))
+    return redirect(url_for("messenger"))
 if __name__ == '__main__':
     app.run(debug=True)

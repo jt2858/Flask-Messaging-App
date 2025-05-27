@@ -81,7 +81,8 @@ async function createchat() {
     for (key of usersselected.keys()) {
         arr.push(key)
     }
-    callapi("createchat", true, JSON.stringify({"users": arr}))
+    await callapi("createchat", true, JSON.stringify({"users": arr}))
+    window.location.href=messengerurl
 }
 
 
