@@ -116,5 +116,14 @@
 
 23/05/2025
     Added functionality to menu searchbar
-        Added new route 
+        Added new route to handle the searching
+    styled searchbar
+
+25/05/2025
+    Added buttons to elements of the user search
+    styled buttons
+    Added "Create chat" button
+
+27/05/2025
+    added functionality to create chat button
     

@@ -114,6 +114,10 @@ body {
     transition: 0.5s ease;
     backdrop-filter: blur(5px);
     flex-wrap: wrap;
+    border-radius: 5px;
+}
+#newchatmenu > p {
+    color: #ccc
 }
 #newchatmenu:focus-within {
     opacity: 1;

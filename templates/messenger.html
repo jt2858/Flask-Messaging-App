@@ -5,7 +5,8 @@
     <ul id="userlist">
         
     </ul>
-    <button>create chat</button>
+    <p id="selecteduserlist"></p>
+    <button onclick="createchat()">create chat</button>
 </div>
 <div id="container2">
     <div id="chatselectorsettings">
@@ -16,8 +17,8 @@
         <ul>
             {% for chat in existing_chats %}
                 <li onclick='if (event.target==event.currentTarget){window.location.href="{{url_for('messenger', chatid=chat[3]) }}"}'>
-                    <img src="{{chat[2]}}">
-                    <p>{{chat[0]}}</p>
+                    <img src="{{chat[2]}}" onclick='if (event.target==event.currentTarget){window.location.href="{{url_for('messenger', chatid=chat[3]) }}"}'>
+                    <p onclick='if (event.target==event.currentTarget){window.location.href="{{url_for('messenger', chatid=chat[3]) }}"}'>{{chat[0]}}</p>
                     <div>
                         <i class="material-icons" onblur="console.log(document.activeElement)" onclick="chatselectoroptions()" tabindex="1">more_horiz</i>
                         <i class="material-icons" onclick="">push_pin</i>
