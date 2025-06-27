@@ -246,6 +246,7 @@ body {
     color: #8184d6;
 }
 #chatselector {
+    overflow: scroll;
     color: white;
     grid-area: chatselector;
     background-color: #11141a;
