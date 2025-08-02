@@ -11,7 +11,8 @@
 <div id="container2">
     <div id="chatselectorsettings">
         <p>{{username}}</p>
-        <i class="material-icons" onclick="shownewchatmenu()">add</i>
+        <i class="material-icons" onclick="shownewchatmenu()" style="margin-right: 15px;">group</i>
+        <i class="material-icons" onclick="shownewchatmenu()" style="margin-left: 0;">add</i>
     </div>
     <div id="chatselector">
         <ul>
@@ -21,8 +22,8 @@
                     <p onclick='if (event.target==event.currentTarget){window.location.href="{{url_for('messenger', chatid=chat[3]) }}"}'>{{chat[0]}}</p>
                     <div>
                         <i class="material-icons" onblur="console.log(document.activeElement)" onclick="chatselectoroptions()" tabindex="1">more_horiz</i>
-                        <i class="material-icons" onclick="">push_pin</i>
-                        <i class="material-icons" onmousedown='window.location.href=apiurl + "?deletechat=" + "{{chat[3]}}"'>delete</i>
+                        <i class="material-icons" onclick="" style="display: none">push_pin</i>
+                        <i class="material-icons" onmousedown='if (confirm("Are you sure you want to delete this chat?")){window.location.href=apiurl + "?deletechat=" + "{{chat[3]}}"}'>delete</i>
                     </div>
                 </li>
             {% endfor %}
@@ -30,20 +31,26 @@
         
     </div>
     <div id="chat">
-        <ul>
+        <ul id="chatcontainer">
             {% for message in message_history %}
-                {% if message[0]==current_user %}
+                {% if message[0]==username %}
                     <li sent="True">
                 {%else%}
                     <li received="True">
                 {%endif%}
-                    <p>{{message[1]}}</p>
+                    <p>{{message[1]}}{{message[2]}}</p>
                 </li>
             {%endfor%}
         </ul>
         <div>
+            <input type="file" id="fileupload" name="file" accept="*" hidden>
+            <p id="fileuploadtext"></p>
+            <img src="" id="fileuploaddisplay">
+            <label for="fileupload" class="fileupload" id="fileuploadlabel"><i class="material-icons">attach_file</i></label>
+            <input type="file" id="imageupload" name="image" accept="image/*" hidden>
+            <label for="imageupload" class="fileupload"><i class="material-icons">add_photo_alternate</i></label>-->
             <textarea id="messageinput"></textarea>
-            <i class="material-icons">send</i>
+            <i class="material-icons" onclick="sendMessage()">send</i>
         </div>
     </div>
 </div>

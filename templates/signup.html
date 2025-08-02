@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <form method = "POST" class="form">
-    <h1>sign up</h1>
+    <h1>SIGN UP</h1>
     {{form.hidden_tag()}}<!-- hidden tag to prevent CSRF attacks -->
     <p>username</p>
     {{form.username}}
@@ -14,4 +14,8 @@
     {%endif%}
     {{form.submit}} <!-- the form's submit button -->
 </form>
-<a style="color:#babbd9; margin-top: 100px;" href="{{url_for('login')}}">sign in</a>
+<div class="signinupbtncontainer">
+    <a class="signinupbtn" href="{{url_for('login')}}">Sign in</a>
+    <a class="signinupbtn" href="{{url_for('signup')}}">Sign Up</a>
+</div>
+

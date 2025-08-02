@@ -1,7 +1,12 @@
+:root {
+    --color-style: #000000;
+    --secondary-color: #29292936;
+}
+
 html { 
     overflow: hidden;
     width: 100vw;
-    background-color: black;
+    background-color: var(--color-style);
 }
 body {
     display: flex;
@@ -25,7 +30,7 @@ body {
     max-width: 100%;
     align-items: center;
     justify-content: right;
-    background-color: #11141a;
+    background-color: var(--color-style);
 }
 
 .nav > li {
@@ -191,8 +196,8 @@ body {
     margin-right: 15px;
     width: 17px;
     height: 17px;
-    background-color: #2f2f2f;
-    border: 1px solid #11141a;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--color-style);
     border-radius: 50%;
     transition: 0.2s ease;
 }
@@ -214,7 +219,7 @@ body {
     border: 1px solid #8184d6;
 }
 #chatselectorsettings {
-    background-color: #11141a;
+    background-color: var(--color-style);
     color: white;
     display: flex;
     justify-content: center;
@@ -249,13 +254,13 @@ body {
     overflow: scroll;
     color: white;
     grid-area: chatselector;
-    background-color: #11141a;
+    background-color: var(--color-style);
 }
 #chatselector > ul {
     padding: 0;
 }
 #chatselector > ul > li {
-    border: 1px solid #11141a;
+    border: 1px solid var(--color-style);
     display: flex;
     align-items: center;
     height: 60px;
@@ -315,15 +320,20 @@ body {
 #chat {
     display: flex;
     grid-area: chat;
-    background-color: #2f2f2f;
+    background-color: var(--secondary-color);
     align-items: center;
     justify-content: end;
     flex-direction: column;
 }
 #chat > ul {
     list-style-type: none;
-    width: 100%;
-    height: 100%;
+    width: calc(100vw - 350px);
+    height: calc(100vh - 150px);
+    overflow-y: auto;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 100px;
 }
 #chat > ul > li {
     display: flex;
@@ -343,7 +353,7 @@ body {
     padding-right: 15px;
     margin: 0;
     width: fit-content;
-    color: #ccc;
+    color: #ffffff;
     position: relative;
     word-wrap: break-word;
 }
@@ -366,7 +376,7 @@ body {
     transition: 1s ease;
 }
 #chat > ul > li[sent] > p{
-    background-color: #444444;
+    background-color: #268f55;
 }
 #chat > ul > li[received] > p{
     background-color: #222222;
@@ -376,11 +386,42 @@ body {
     justify-content: center;
     align-items: center;
     margin-bottom: 50px;
+    position: absolute;
+}
+.fileupload{
+    background-color: transparent;
+    color: #ccc;
+    text-align: center;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+.fileupload > i{
+    font-size: 38px;
+    color: #ccc;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+#fileuploadlabel > i{
+    font-size: 32px;
+}
+.fileupload > i:hover{
+    color: #8184d6;
+    transform: translate(0,0);
+}
+#fileuploadtext {
+    color: white;
+    margin-left: auto;
+    align-self: left;
+
 }
 #chat > div > textarea {
-    outline: none;;
+    outline: none;
     resize: none;
-    position: relative;
     font-family: "Lucida Console", "Courier New", monospace;
     font-size: 16px;
     border: 1px solid #434a57;
@@ -388,7 +429,7 @@ body {
     width: 400px;
     padding: 10px;
     height: 18px;
-    background-color: #2f2f2f;
+    background-color: var(--secondary-color);
     color: #ccc;
 }
 #chat > div > i {
@@ -413,168 +454,6 @@ body {
 
 
 
-#profilesettings {
-    height: 200px;
-    width: 300px;
-    background-color: white;
-    display: flex;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-#profilesettings > input:last-child {
-    width: 40%;
-}
-#profilesettings > label {
-    height: 100px;
-    width: 100px;
-    background-color: grey;
-}
-#profilesettings > label > img {
-    border-radius: 25%;
-    transition: 0.5s ease;
-    opacity: 1;
-}
-
-#profilesettings > label> img:hover {
-    cursor:pointer;
-    opacity: 50%;
-}
-#profilesettings > p {
-    transition: 0.25s ease;
-}
-#profilesettings > p:hover {
-    color: red;
-    cursor: pointer;
-}
-#selectpfpimage {
-    height: 100%;
-}
-
-.chatsearch {
-    grid-area: search;
-    text-align: center;
-}
-.chatselector {
-    overflow :auto;
-    grid-area: menu;
-}
-.chatinfo {
-    background-color: #fcfcfc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: auto;
-    grid-area: chatinfo;
-    font-size: 24px;
-}
-.chatinfo > a {
-    display: none;
-    color:black
-}
-.messagecontainer {
-    background-color: #000000;
-    display: flex;
-    flex-direction: column-reverse;
-    overflow-y:auto;
-    overflow-x: hidden;
-    width: auto;
-    height: auto;
-    grid-area: main;
-}
-.message > div {
-    display: none;
-    font-size: 16px;
-    position: relative;
-    left: 5px;
-}
-.message[sent] {
-    display:flex;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    justify-content: right;
-}
-.message[sent] > p{
-    background-color: #444444;
-}
-.message[received] > p{
-    background-color: #222222;
-}
-.inputcontainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    grid-area: input;
-}
-.friend {
-    display:flex;
-    align-items: center;
-    margin: 0;
-    height: 10%;
-    background-color: #fcfcfc;
-}
-.friend > p {
-    margin: 0;
-}
-.friend > img {
-    height: 50%;
-    margin-right: 5%;
-    border-radius: 50%;
-}
-.friend:hover {
-    background-color: #f7f7f7;
-    cursor: pointer;
-}
-
-#chatlist {
-    height: 100%;
-    list-style-type: none;
-}
-#messagelist {
-    list-style-type: none;
-}
-#message {
-    display: none;
-    border: 2px solid black;
-    border-radius: 25px;
-    font-size: 16px;
-    width: 80%;
-    height: 40px;
-}
-#newchat {
-    padding: 0;
-    width: 100%;
-    height: 50%;
-    background-color: lightgrey;
-    font-size: 20px;
-    border: none;
-}
-#newchat:hover {
-    background-color: grey;
-    cursor: pointer;
-}
-#nochatwarning {
-    text-align: center;
-}
-#search {
-    display: none;
-    border: 1px solid black;
-    text-align: center;
-    padding: 0;
-    width: 98%;
-    height: 40%;
-    font-size: 16px;
-}
-#profilesettings {
-    z-index: 1;
-}
-
-
 @media only screen and (max-width: 600px) {
     .chatinfo {display: none}
     .messagecontainer {display: none}
@@ -591,19 +470,53 @@ body {
 
 /* LOGIN/SIGNUP.HTML */
 .form{
+    margin-top: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     flex-direction: column;
-    color: #babbd9;
+    color: #ffffff;
+    height: 450px;
+    margin-bottom: 0;
+    border: 1px solid white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom: none;
+    position: relative;
+    width: 500px;
+
+}
+.form > h1 {
+    position: absolute;
+    top: 10px;
 }
 .form > p{
-    font-size: 20px;
+    font-size: 24px;
+    margin: 25px;
 }
 .form > input {
+    position: relative;
+    font-size: 26px;
     font: inherit;
-    width: fit-content;
+    width: 250px;
+    height: 25px;
+    padding: 15px;
+    border: 1px solid white;
+    border-radius: 10px;
+    border-bottom-right-radius: 0px;
+    background-color: transparent;
+    color: white;
+}
+.form > input:last-child {
+    margin-top: 50px;
+    font-size: 20px;
+    height: 50px;
+    width: 500px;
+    bottom: -35px;
+}
+.form > input:focus {
+    outline: none;
 }
 .form > #submit {
     margin-top: 25px;
@@ -618,6 +531,44 @@ body {
     cursor: pointer;
     color: #9697b3;
     font-size: 32px;
+}
+.signinupbtn { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    width: 250px;
+    height: 50px;
+    border: 1px solid white;
+    border-bottom: none;
+    border-top: 1px solid white;
+    text-decoration-line: none;
+}
+.signinupbtn:first-child { 
+    border-left: none;
+}
+.signinupbtn:first-child:hover { 
+    background-color: #292e38;
+    border-bottom-left-radius: 15px;
+    border-bottom: 1px solid white;
+}
+.signinupbtn:last-child { 
+    border-right: none;
+}
+.signinupbtn:last-child:hover { 
+    background-color: #292e38;
+    border-bottom-right-radius: 15px;
+    border-bottom: 1px solid white;
+}
+.signinupbtncontainer {
+    width: 500px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid white;
+    border-top: none;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
 
 

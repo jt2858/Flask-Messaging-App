@@ -84,7 +84,7 @@
     ----------------------------------------------
     Created a new workspace to start from scratch (still borrowing previous code)
     Styled root page
-    Created login,signup,dashboard,calendar,messenger .html files and their respective routing
+    Created login,signup,dashboard, messenger .html files and their respective routing
     Switched to SQLAlchemy and Flask Login & added functionallity to respective files
 
 20/05/2025
@@ -126,4 +126,19 @@
 
 27/05/2025
     added functionality to create chat button
-    
+
+28/07/2025
+    added basic flask-socketio functionallity to enable real-time chats
+
+30/07/2025
+    fixed styling on 'messenger' page
+    changed main colors on 'messenger' page to variables for ease of change
+    deleted 'dashboard' page - no reasonable usage
+    fixed chat deletion
+
+31/07/2025
+    fixed bug where users of deleted chats could see new chats that were given the same ID as the deleted one
+    disabled deleting AI chats since users can't create new ones
+    fixed bug where user's chats are replaced with another on chat deletion
+    added image upload button
+    added file upload button

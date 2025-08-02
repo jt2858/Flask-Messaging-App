@@ -1,7 +1,12 @@
+var socket = null;
+
+
 function sendMessage() {
     const messageInput = document.getElementById("messageinput").value;
-    console.log(messageInput)
-    document.getElementById("messageinput").value = null;
+    if (messageInput.trim().length!=0){
+        document.getElementById("messageinput").value = null;
+        socket.emit("message", JSON.stringify({"message": messageInput, "sender": socket.id, "room": new URLSearchParams(window.location.search).get("chatid")}))
+    }
 }
 function shownewchatmenu() {
     if (document.getElementById("newchatmenu").style.display!="flex") {
@@ -11,6 +16,7 @@ function shownewchatmenu() {
     }
 }
 window.onload = function() {
+    socket=io()
     document.getElementById("newchatmenu").addEventListener("focusout", e => {
         if (!e.currentTarget.contains(e.relatedTarget)) {
             document.getElementById("container2").style.filter = "blur(0px)";
@@ -26,11 +32,59 @@ window.onload = function() {
             return;
         }
     })
+    socket.on("message", async function(data) {
+        if (String(new URLSearchParams(window.location.search).get("chatid"))==String(JSON.parse(data)['room'])){
+            let message = document.createElement("li")
+            if (JSON.parse(data)['sender']==socket.id) {message.setAttribute("sent", "True")}
+            else {message.setAttribute("received", "True")}
+            let text = document.createElement("p")
+            text.textContent=JSON.parse(data)['message']
+            message.appendChild(text)
+            //if (JSON.parse(data)['file']!="") {
+            //    let img =document.createElement("img")
+            //    img.src=JSON.parse(data)['file']
+            //    message.appendChild(img)
+            //}
+            document.getElementById("chatcontainer").appendChild(message)
+            message.scrollIntoView({behavior: "smooth"});
+
+        }
+    })
+    document.getElementById("fileupload").onchange = function(event) {
+        let file = event.target.files[0]
+        const reader = new FileReader();
+
+        // Set up the onloadend event handler
+        reader.onloadend = function() {
+            const base64String = reader.result; // This will contain the Base64 data URL
+            console.log(base64String); // You can now use this Base64 string
+            document.getElementById("fileuploadtext").textContent=file['name'];
+            document.getElementById("fileuploaddisplay").src=""
+        };
+
+        // Read the file as a Data URL
+        reader.readAsDataURL(file);
+    }
+    document.getElementById("imageupload").onchange = function(event) {
+        let file = event.target.files[0]
+        const reader = new FileReader();
+
+        // Set up the onloadend event handler
+        reader.onloadend = function() {
+            const base64String = reader.result; // This will contain the Base64 data URL
+            console.log(base64String); // You can now use this Base64 string
+            document.getElementById("fileuploadtext").textContent="";
+            document.getElementById("fileuploaddisplay").src=base64String;
+        };
+
+        // Read the file as a Data URL
+        reader.readAsDataURL(file);
+    }
     
 }
 
-const usersselected = new Map();
 
+const usersselected = new Map();
 function editusersselected(user) {
     if (usersselected.has(user)) {
         usersselected.delete(user);
