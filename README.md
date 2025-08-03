@@ -1,4 +1,4 @@
-# MessageApplication
+# Messaging Application
 This is a real-time messaging application built with Flask, SocketIO, and Google Gemini AI. Features encrypted messaging, group chats, image sharing, and intelligent AI responses.
 ## 🚀 Features
 ### Messaging
