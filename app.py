@@ -91,7 +91,7 @@ def signup():
         # Hash password with PBKDF2 and salt
         password = generate_password_hash(form.password.data, method='pbkdf2:sha256', salt_length=128)
         # Create AI chat for new user with encrypted welcome message
-        ai_chat = Chat(name=username+"'s AI", messages='{"0": {"from": "'+username+'\'s AI", "message": ' + encrypt_text("Hello.") + '}}', chat_type="AI", picture=os.getenv("AIPFP"))
+        ai_chat = Chat(name=username+"'s AI", messages='{"0": {"from": "'+username+'\'s AI", "message": "' + encrypt_text("Hello.") + '"}}', chat_type="AI", picture=os.getenv("AIPFP"))
         db.session.add(ai_chat)
         db.session.commit()
         # Create new user with reference to their AI chat
@@ -304,5 +304,6 @@ def decrypt_text(encrypted_text):
 # Application entry point
 if __name__ == '__main__':
     socketio.run(app, debug=True)
+
 
 
