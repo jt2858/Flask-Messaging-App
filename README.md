@@ -88,25 +88,6 @@ python app.py
 - Switch Chats: Click on any chat in the sidebar
 - Real-time Updates: Messages appear instantly across all connected clients
 
-## 🏗️ Architecture
-### Project Structure
-flask-messenger/
-├── app.py                 # Main Flask application
-├── static/
-│   ├── css/
-│   │   └── style.css     # Styles and theming
-│   └── js/
-│       └── messenger.js  # Client-side JavaScript
-├── templates/
-│   ├── layout.html       # Base template
-│   ├── messenger.html    # Main chat interface
-│   ├── login.html        # Login page
-│   └── signup.html       # Registration page
-├── database/
-│   └── data.db          # SQLite database
-├── .env                 # Environment variables
-└── README.md
-
 ## Database Schema
 ### Users Table
 - id: Primary key
