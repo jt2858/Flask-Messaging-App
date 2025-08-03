@@ -67,7 +67,7 @@
             {%endfor%}
         </ul>
         <!-- Message input area at bottom -->
-        <div>
+        <div {%if not active_chat_id%} style="display: none;" {%endif%}>
             <!-- Image preview (hidden by default) -->
             <img id="imageuploaddisplay">
             <!-- Hidden file input for image uploads -->
@@ -80,4 +80,5 @@
             <i class="material-icons" onclick="sendMessage()">send</i>
         </div>
     </div>
+
 </div>
