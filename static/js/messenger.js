@@ -1,13 +1,34 @@
+
+// Global SocketIO connection variable
 var socket = null;
 
-
+/**
+ * Send a message through SocketIO
+ * Handles both text messages and messages with images
+ */
 function sendMessage() {
     const messageInput = document.getElementById("messageinput").value;
+        // Only send if message has content
     if (messageInput.trim().length!=0){
+        // Clear input field immediately for better UX
         document.getElementById("messageinput").value = null;
-        socket.emit("message", JSON.stringify({"message": messageInput, "sender": socket.id, "room": new URLSearchParams(window.location.search).get("chatid")}))
+        // Check if there's an image attached
+        if (document.getElementById("imageuploaddisplay").src!=undefined) {
+            // Send message with image data (base64 encoded)
+            socket.emit("message", JSON.stringify({"message": messageInput, "sender": socket.id, "room": new URLSearchParams(window.location.search).get("chatid"), "image": String(document.getElementById("imageuploaddisplay").src)}))
+            // Clear image display after sending
+            document.getElementById("imageuploaddisplay").removeAttribute("src")
+        }
+        else {
+            // Send text-only message
+            socket.emit("message", JSON.stringify({"message": messageInput, "sender": socket.id, "room": new URLSearchParams(window.location.search).get("chatid")}))
+        }
     }
 }
+/**
+ * Show the new chat creation menu
+ * Applies blur effect to background
+ */
 function shownewchatmenu() {
     if (document.getElementById("newchatmenu").style.display!="flex") {
         document.getElementById("newchatmenu").style.display="flex";
@@ -15,8 +36,13 @@ function shownewchatmenu() {
         document.getElementById("container2").style.filter = "blur(5px)";
     }
 }
+/**
+ * Main initialization function - runs when page loads
+ */
 window.onload = function() {
+    // Initialize SocketIO connection
     socket=io()
+    // Hide new chat menu when clicking outside of it
     document.getElementById("newchatmenu").addEventListener("focusout", e => {
         if (!e.currentTarget.contains(e.relatedTarget)) {
             document.getElementById("container2").style.filter = "blur(0px)";
@@ -25,6 +51,7 @@ window.onload = function() {
             }, 500);
         }
     });
+    // Handle Enter key press in message input (without Shift for send)
     document.getElementById("messageinput").addEventListener("keydown", e => {
         if (e.key == "Enter" && e.shiftKey == false) {
             sendMessage();
@@ -32,39 +59,41 @@ window.onload = function() {
             return;
         }
     })
+    /**
+     * Handle incoming messages from SocketIO
+     * Creates and displays message elements in real-time
+     */
     socket.on("message", async function(data) {
+        // Only display message if it's for the currently active chat
         if (String(new URLSearchParams(window.location.search).get("chatid"))==String(JSON.parse(data)['room'])){
             let message = document.createElement("li")
+            // Style message based on sender (sent by current user or received)
             if (JSON.parse(data)['sender']==socket.id) {message.setAttribute("sent", "True")}
             else {message.setAttribute("received", "True")}
             let text = document.createElement("p")
             text.textContent=JSON.parse(data)['message']
             message.appendChild(text)
-            //if (JSON.parse(data)['file']!="") {
-            //    let img =document.createElement("img")
-            //    img.src=JSON.parse(data)['file']
-            //    message.appendChild(img)
-            //}
             document.getElementById("chatcontainer").appendChild(message)
             message.scrollIntoView({behavior: "smooth"});
+            console.log(JSON.parse(data)['image'])
+            // Handle image attachments
+            if (JSON.parse(data)['image']!="" && JSON.parse(data)['image']!=undefined) {
+                let img =document.createElement("img")
+                img.src=JSON.parse(data)['image']
+                let imgli = document.createElement("li")
+                if (JSON.parse(data)['sender']==socket.id) {imgli.setAttribute("sent", "True")}
+                else {imgli.setAttribute("received", "True")}
+                imgli.appendChild(img)
+                document.getElementById("chatcontainer").appendChild(imgli)
+                imgli.scrollIntoView({behavior: "smooth"});
+            }
 
         }
     })
-    document.getElementById("fileupload").onchange = function(event) {
-        let file = event.target.files[0]
-        const reader = new FileReader();
-
-        // Set up the onloadend event handler
-        reader.onloadend = function() {
-            const base64String = reader.result; // This will contain the Base64 data URL
-            console.log(base64String); // You can now use this Base64 string
-            document.getElementById("fileuploadtext").textContent=file['name'];
-            document.getElementById("fileuploaddisplay").src=""
-        };
-
-        // Read the file as a Data URL
-        reader.readAsDataURL(file);
-    }
+    /**
+     * Handle file upload for images
+     * Converts uploaded image to base64 for transmission
+     */
     document.getElementById("imageupload").onchange = function(event) {
         let file = event.target.files[0]
         const reader = new FileReader();
@@ -72,9 +101,7 @@ window.onload = function() {
         // Set up the onloadend event handler
         reader.onloadend = function() {
             const base64String = reader.result; // This will contain the Base64 data URL
-            console.log(base64String); // You can now use this Base64 string
-            document.getElementById("fileuploadtext").textContent="";
-            document.getElementById("fileuploaddisplay").src=base64String;
+            document.getElementById("imageuploaddisplay").src=base64String;
         };
 
         // Read the file as a Data URL
@@ -83,7 +110,7 @@ window.onload = function() {
     
 }
 
-
+// Map to track selected users for new chat creation
 const usersselected = new Map();
 function editusersselected(user) {
     if (usersselected.has(user)) {
@@ -93,7 +120,10 @@ function editusersselected(user) {
         usersselected.set(user, usersselected.size);
     }
 }
-
+/**
+ * Search for users to add to new chat
+ * Makes API call and updates UI with search results
+ */
 async function searchusers() {
     if (document.getElementById("searchusers").value == "") {
         document.getElementById("userlist").remove();
@@ -129,7 +159,10 @@ async function searchusers() {
     document.getElementById("newchatmenu").appendChild(newul);
     newul.id="userlist";
 }
-
+/**
+ * Create new chat with selected users
+ * Makes API call and redirects to messenger
+ */
 async function createchat() {
     arr = []
     for (key of usersselected.keys()) {
@@ -139,7 +172,13 @@ async function createchat() {
     window.location.href=messengerurl
 }
 
+/**
+ * Generic API call function
+ * arg - API endpoint argument
+ * val - API endpoint value
+ * body - Optional request body for POST requests
 
+ */
 async function callapi(arg, val, body=null) {
     let response=""
     if (body) {

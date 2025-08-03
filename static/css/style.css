@@ -1,7 +1,10 @@
+/* CSS Custom Properties for consistent theming */
+
 :root {
     --color-style: #000000;
     --secondary-color: #29292936;
 }
+/* Base HTML and Body Styling */
 
 html { 
     overflow: hidden;
@@ -88,6 +91,7 @@ body {
 
 
 /* MESSENGER.HTML */
+/* Main Messenger Container - CSS Grid Layout */
 #container2 {
     position: relative;
     width: 100vw;
@@ -101,6 +105,7 @@ body {
     align-self:last baseline;
     transition: 0.5s ease;
 }
+/* Create new chat popup gui */
 #newchatmenu {
     outline: none;
     display: none;
@@ -155,10 +160,12 @@ body {
     height: 7%;
 }
 #newchatmenu > ul {
+    position: absolute;
+    top: 20%;
     overflow-y: scroll;
     overflow-x: hidden;
     width: calc(55% + 78px);
-    height: 70%;
+    max-height: 57.5%;
     padding: 0;
 }
 #newchatmenu > ul > li {
@@ -241,15 +248,6 @@ body {
 #chatselectorsettings > i:hover {
     color: #8184d6;
 }
-#chatselectorsettings > i {
-    margin-left: auto;
-    margin-right: 25px;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-#chatselectorsettings > i:hover {
-    color: #8184d6;
-}
 #chatselector {
     overflow: scroll;
     color: white;
@@ -266,6 +264,10 @@ body {
     height: 60px;
     transition: 0.2s ease;
     cursor: pointer;
+}
+#chatselector > ul > li[selected="True"] {
+    background-color: #292e38;
+    border-color: #434a57;
 }
 #chatselector > ul > li:hover {
     background-color: #292e38;
@@ -357,6 +359,10 @@ body {
     position: relative;
     word-wrap: break-word;
 }
+#chat > ul > li > img {
+    max-height: 500px;
+    max-width: 500px;
+}
 #chat > ul > li[sent] {
     display:flex;
     margin-bottom: 10px;
@@ -406,19 +412,17 @@ body {
     transition: 0.2s ease;
     cursor: pointer;
 }
-#fileuploadlabel > i{
-    font-size: 32px;
-}
+
 .fileupload > i:hover{
     color: #8184d6;
     transform: translate(0,0);
 }
-#fileuploadtext {
-    color: white;
-    margin-left: auto;
-    align-self: left;
-
+#imageuploaddisplay {
+    margin-right: 25px;
+    max-height: 100px;
+    max-width: 100px;
 }
+
 #chat > div > textarea {
     outline: none;
     resize: none;
@@ -442,6 +446,7 @@ body {
     color: #8184d6;
     transform: translate(5px,0);
 }
+
 
 
 

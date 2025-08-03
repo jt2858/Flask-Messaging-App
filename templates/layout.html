@@ -1,18 +1,23 @@
+<!-- layout.html - Base template with common elements -->
 <!DOCTYPE html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="UTF-8">
+    <!-- Google Material Icons for UI elements -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <html lang="en"></html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- JavaScript variables for API endpoints - populated by Flask -->
 <script>
     const apiurl = "{{url_for('api')}}"
     const messengerurl = "{{url_for('messenger')}}"
 </script>
+<!-- CSS and JavaScript includes -->
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.min.js"></script>
 <body>
+    <!-- Navigation bar with logout option -->
     <ul class="nav">
         <li><a href="{{url_for('logout')}}">logout</a></li>
     </ul>
