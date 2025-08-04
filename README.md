@@ -52,7 +52,7 @@ SQLAlchemy - Lightweight ORM database
 ```bash
 pip install flask flask-sqlalchemy flask-login flask-wtf flask-socketio
 pip install wtforms werkzeug cryptography python-dotenv
-pip install google-generativeai pillow numpy
+pip install google-genai pillow numpy
 ```
 3. Run the application!
 ```bash
