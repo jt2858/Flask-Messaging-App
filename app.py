@@ -98,8 +98,8 @@ def signup():
         new_user = User(username=username, password=password, chats=str(ai_chat.id))
         db.session.add(new_user)
         db.session.commit()
-        return redirect(url_for('login'), success=True)
-    return render_template('signup.html', form=form, error="Username already in use")
+        return redirect(url_for('login'))
+    return render_template('signup.html', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -304,6 +304,7 @@ def decrypt_text(encrypted_text):
 # Application entry point
 if __name__ == '__main__':
     socketio.run(app, debug=True)
+
 
 
 
